@@ -11,7 +11,7 @@ public class ArithmaticExp {
 		//Thread.sleep(5000);
 		
 		System.out.println(a/b);
-		System.out.println("hello");
+		System.out.println("hi");
 		
 	}
 
