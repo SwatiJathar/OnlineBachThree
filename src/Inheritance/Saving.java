@@ -4,6 +4,10 @@ public class Saving extends Account{
 
 	double ROI;
 	
+	public Saving(){
+		ROI = 7;
+	}
+	
 	public Saving(String name, String type, double ROI){
 		
 		super(name,type);

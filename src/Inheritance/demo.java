@@ -20,6 +20,10 @@ public class demo {
 		s1.displayAccountDetails();
 		s1.displaySavingDetails();
 		
+		Saving s2 = new Saving();
+		s2.displayBankDetails();
+		s2.displayAccountDetails();
+		s2.displaySavingDetails();
 	}
 
 }

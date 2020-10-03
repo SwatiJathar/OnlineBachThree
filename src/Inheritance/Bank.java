@@ -5,6 +5,14 @@ public class Bank {
 	String name, branch, address;
 	int branchCode;
 	int no;
+	
+	public Bank(){
+		name = "IDFC";
+		branch = "Hinjewadi";
+		address = "Phase1";
+		branchCode = 585;
+	}
+	
 	public Bank(String name){
 		System.out.println("In Bank Class");
 		this.name = name;

@@ -4,6 +4,12 @@ public class Account extends Bank {
 	int accNo;
 	String accHolderName, type;
 	
+	public Account(){
+		accNo = 786;
+		accHolderName = "Sapana";
+		type = "FD";
+	}
+	
 	public Account(String name, String type){
 		super(name);
 		System.out.println("In Account Class");
