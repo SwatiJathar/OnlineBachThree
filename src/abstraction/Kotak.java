@@ -16,4 +16,11 @@ public class Kotak extends RBI  implements Intrest {
 		
 	}
 
+
+	
+	public void calLateFeedemo() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

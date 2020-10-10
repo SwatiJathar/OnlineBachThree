@@ -16,7 +16,13 @@ public class SBI extends RBI implements Intrest, abc {
 
 	
 	public void calLateFee() {
-		System.out.println( "500");		
+		System.out.println( "500");	
+		
+	}
+	
+	public void calLateFeedemo() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
