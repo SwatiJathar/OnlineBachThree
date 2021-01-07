@@ -2,6 +2,7 @@ package seleniumBasics;
 
 import java.util.Base64;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 import javax.annotation.processing.SupportedOptions;
 
@@ -10,6 +11,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ChromeDemo {
 	static WebDriver driver = null;
@@ -29,7 +33,9 @@ public class ChromeDemo {
 			driver = new FirefoxDriver();
 		}
 		
-		openBrowser("https://www.amazon.in/");
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		
+		openBrowser("https://retail.onlinesbi.com/retail/login.htm");
 		//getTitle();
 		//getCurrentUrl();
 		//getPageSource();
@@ -46,7 +52,7 @@ public class ChromeDemo {
 		driver.navigate().to(url);
 		//driver.get("https://retail.onlinesbi.com/retail/login.htm#");
 		//driver.navigate().back();
-		Thread.sleep(5000);
+		//Thread.sleep(5000);
 		//driver.navigate().forward();
 	}
 	
@@ -64,31 +70,38 @@ public class ChromeDemo {
 	
 	public static void personalBanking() throws InterruptedException{
 		driver.findElement(By.partialLinkText("CONTINUE TO ") ).click();
-		Thread.sleep(2000);
+		//Thread.sleep(2000);
 	}
 	
 	public static void login() throws InterruptedException{
 		
-			click(driver.findElement(By.id("username") ));
-			Thread.sleep(1000);
-			sendKeys(driver.findElement(By.id("username") ), "username");
-			Thread.sleep(1000);
+		WebDriverWait wait  = new WebDriverWait(driver, 30);
 		
-			click(driver.findElement(By.name("password") ));
-			Thread.sleep(1000);
+		WebElement ele = wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id("username") )));
+		
+		//ele.click();
+			click(ele);
+			//Thread.sleep(1000);
+			sendKeys(driver.findElement(By.id("username") ), "username");
+			//Thread.sleep(1000);
+		
+			WebElement elePass = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.name("password") )));
+			
+			click(elePass);
+			//Thread.sleep(1000);
 			String pass = "SW5kaWEgVGVhbSB3aWxsIHdpbiB0aGUgQ3Vw";
 			
 			//Base64.getDecoder().decode(pass).toString() 
 			sendKeys(driver.findElement(By.name("password") ), Base64.getDecoder().decode(pass).toString());
-			Thread.sleep(1000);
+			//Thread.sleep(1000);
 		
 		
 		if( true == checkElement( driver.findElement(By.xpath("//input[@id='loginCaptchaValue']") )  ) ) {
 		
 			driver.findElement(By.xpath("//input[@id='loginCaptchaValue']") ).click();
-			Thread.sleep(1000);
+			//Thread.sleep(1000);
 			driver.findElement(By.xpath("//input[@id='loginCaptchaValue']") ).sendKeys("captcha");
-			Thread.sleep(1000);
+			//Thread.sleep(1000);
 		}
 		WebElement audiocaptchaOption 	= driver.findElement(By.xpath("(//input[@id='capOption'])[2]") );
 		WebElement imgcaptchaOption 	= driver.findElement(By.xpath("(//input[@id='capOption'])[1]") );
@@ -111,10 +124,10 @@ public class ChromeDemo {
 			audiocaptchaOption.click();
 		}
 		
-		Thread.sleep(1000);
+		//Thread.sleep(1000);
 		if(false == driver.findElement(By.id("chkbox") ).isSelected()){
 			driver.findElement(By.id("chkbox") ).click();
-			Thread.sleep(1000);
+			//Thread.sleep(1000);
 			
 			if(true == driver.findElement(By.xpath("//td[contains(text(),'Online Virtual Keyboard')]")).isDisplayed()){
 				System.out.println("Virtual keyboard is visible");
