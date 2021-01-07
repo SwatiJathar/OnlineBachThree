@@ -1,5 +1,8 @@
 package seleniumBasics;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.Properties;
 import java.util.Set;
 
 import org.openqa.selenium.Alert;
@@ -18,19 +21,33 @@ public class MultipleWindowAndDropdown extends ChromeDemo{
 				String browser = "CHROME"; //"Chrome" // "CHROME"
 		
 		if(browser.equalsIgnoreCase("chrome")){
-			System.setProperty("webdriver.chrome.driver", "C:\\Users\\Manish\\Downloads\\chromedriver_win32\\chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver", "W:\\chromedriver.exe");
 			driver = new ChromeDriver();
 			 
 		}else if (browser.equalsIgnoreCase("Firefox")) {
-			System.setProperty("webdriver.geko.driver", "C:\\Users\\Manish\\Downloads\\chromedriver_win32\\geko.exe");
+			System.setProperty("webdriver.geko.driver", "W:\\geko.exe");
 			driver = new FirefoxDriver();
 		}
 		
-		
-		openBrowser();
+		try {
+			FileInputStream fis = new FileInputStream("C:\\Users\\hp\\eclipse-workspace\\OnlineBachThree\\src\\seleniumBasics\\OR.properties");
+			
+			or = new Properties();
+			
+			or.load(fis);
+			
+			System.out.println(or.getProperty("lnkForgotPass"));
+			
+			Thread.sleep(5000);
+			
+			
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		openBrowser("https://retail.onlinesbi.com/retail/login.htm");
 		personalBanking();
 		
-		click(driver.findElement(By.xpath("//a[contains(text(),'Forgot')]")));
+		click(driver.findElement(By.xpath( or.getProperty("lnkForgotPass") )));
 		
 		String parentWindowId = driver.getWindowHandle();
 		
@@ -45,13 +62,13 @@ public class MultipleWindowAndDropdown extends ChromeDemo{
 				driver.switchTo().window(windowId);
 				
 				//driver.findElement(By.xpath("//select[@name='issueCode']"));
-				Select forgotPassOptions =  new Select(driver.findElement(By.xpath("//select[@name='issueCode']")));
+				Select forgotPassOptions =  new Select(driver.findElement(By.xpath( or.getProperty("drpIssueValue") )));
 				//forgotPassOptions.selectByIndex(2);
 				//forgotPassOptions.selectByValue("ResetLoginPassword");
 				forgotPassOptions.selectByVisibleText("Forgot Username");
 				Thread.sleep(2000);
 				
-				click(driver.findElement(By.xpath("//input[@name='nextStep']")));
+				click(driver.findElement(By.xpath( or.getProperty("btnNextStep") )));
 				
 				System.out.println(parentWindowId + " =====================" + driver.getWindowHandle());
 				

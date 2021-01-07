@@ -1,6 +1,7 @@
 package seleniumBasics;
 
 import java.util.Base64;
+import java.util.Properties;
 
 import javax.annotation.processing.SupportedOptions;
 
@@ -12,6 +13,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class ChromeDemo {
 	static WebDriver driver = null;
+	static Properties or= null;
 	
 	public static void main(String[] args) throws InterruptedException {
 		// TODO Auto-generated method stub
@@ -19,15 +21,15 @@ public class ChromeDemo {
 		String browser = "CHROME"; //"Chrome" // "CHROME"
 		
 		if(browser.equalsIgnoreCase("chrome")){
-			System.setProperty("webdriver.chrome.driver", "C:\\Users\\Manish\\Downloads\\chromedriver_win32\\chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver", "W:\\chromedriver.exe");
 			driver = new ChromeDriver();
 			 
 		}else if (browser.equalsIgnoreCase("Firefox")) {
-			System.setProperty("webdriver.geko.driver", "C:\\Users\\Manish\\Downloads\\chromedriver_win32\\geko.exe");
+			System.setProperty("webdriver.geko.driver", "W:\\geko.exe");
 			driver = new FirefoxDriver();
 		}
 		
-		openBrowser();
+		openBrowser("https://www.amazon.in/");
 		//getTitle();
 		//getCurrentUrl();
 		//getPageSource();
